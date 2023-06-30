@@ -14,11 +14,16 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "0.2.32",
     "@prisma/client": "4.15.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-switch": "^1.0.3",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "lucide-react": "0.105.0-alpha.4",
+    "negotiator": "^0.6.3",
     "next": "^13.4.4",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
