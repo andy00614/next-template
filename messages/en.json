@@ -1,6 +1,12 @@
 {
   "Index": {
     "title": "Hi there!",
-    "to-second-page": "To second page"
+    "to-second-page": "go to the second page",
+    "content": "This is a multilingual Next.js template."
+  },
+  "Second": {
+    "title": "This is second page",
+    "content": "hello world",
+    "back": "back to index page"
   }
 }

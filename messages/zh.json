@@ -1,6 +1,12 @@
 {
   "Index": {
     "title": "你好",
-    "to-second-page": "去第二页"
+    "to-second-page": "去第二页",
+    "content": "这是一个多语言的 Next.js 模板"
+  },
+  "Second": {
+    "title": "第二页",
+    "content": "你好，世界",
+    "back": "返回首页"
   }
 }

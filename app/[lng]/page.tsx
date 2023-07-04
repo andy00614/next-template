@@ -1,6 +1,12 @@
 import Link from 'next/link'
 import { Language } from '../i18n/settings'
-import Content from './Content';
+import { Button } from '@/components/ui/button';
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+import { Terminal } from 'lucide-react';
 
 interface PageProps {
   params: {
@@ -12,11 +18,17 @@ export default async function Page({ params: { lng } }: PageProps) {
   const messages = (await import(`../../messages/${lng}.json`)).default;
   return (
     <>
-      <h1>{messages.Index.title}</h1>
+      <Alert>
+        <Terminal className="h-4 w-4" />
+        <AlertTitle>{messages.Index.title}</AlertTitle>
+        <AlertDescription>
+          {messages.Index.content}
+        </AlertDescription>
+      </Alert>
+
       <Link href={`/${lng}/second-page`}>
-        second page
+        <Button variant="link">{messages.Index['to-second-page']}</Button>
       </Link>
-      <Content />
     </>
   )
 }

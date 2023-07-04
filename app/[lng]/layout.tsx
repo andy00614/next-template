@@ -62,7 +62,7 @@ export default async function RootLayout({ children, params: { lng } }: RootLayo
             <div className="relative flex min-h-screen flex-col">
               <NextIntlClientProvider locale={lng} messages={messages}>
                 <SiteHeader />
-                <div className="flex-1">{children}</div>
+                <div className="flex-1 p-8">{children}</div>
               </NextIntlClientProvider>
             </div>
             <TailwindIndicator />
