@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Language } from '../i18n/settings'
-import { useTranslations } from 'next-intl';
 import Content from './Content';
 
 interface PageProps {
@@ -11,7 +10,6 @@ interface PageProps {
 
 export default async function Page({ params: { lng } }: PageProps) {
   const messages = (await import(`../../messages/${lng}.json`)).default;
-  // const t = useTranslations('Index');
   return (
     <>
       <h1>{messages.Index.title}</h1>

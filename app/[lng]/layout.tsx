@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import { dir } from 'i18next'
 import { Language, languages } from "../i18n/settings"
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
@@ -51,7 +50,7 @@ export default async function RootLayout({ children, params: { lng } }: RootLayo
   }
   return (
     <>
-      <html lang={lng} dir={dir(lng)}>
+      <html lang={lng} suppressHydrationWarning>
         <head />
         <body
           className={cn(
@@ -60,13 +59,13 @@ export default async function RootLayout({ children, params: { lng } }: RootLayo
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <NextIntlClientProvider locale={lng} messages={messages}>
-              <div className="relative flex min-h-screen flex-col">
+            <div className="relative flex min-h-screen flex-col">
+              <NextIntlClientProvider locale={lng} messages={messages}>
                 <SiteHeader />
                 <div className="flex-1">{children}</div>
-              </div>
-              <TailwindIndicator />
-            </NextIntlClientProvider>
+              </NextIntlClientProvider>
+            </div>
+            <TailwindIndicator />
           </ThemeProvider>
         </body>
       </html>
