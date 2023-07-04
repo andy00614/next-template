@@ -7,6 +7,12 @@ import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import { dir } from 'i18next'
+import { Language, languages } from "../i18n/settings"
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
+
+
 
 export const metadata: Metadata = {
   title: {
@@ -26,13 +32,26 @@ export const metadata: Metadata = {
 }
 
 interface RootLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode,
+  params: {
+    lng: Language
+  }
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export async function generateStaticParams() {
+  return languages.map((lng) => ({ lng }))
+}
+
+export default async function RootLayout({ children, params: { lng } }: RootLayoutProps) {
+  let messages
+  try {
+    messages = (await import(`../../messages/${lng}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang={lng} dir={dir(lng)}>
         <head />
         <body
           className={cn(
@@ -41,11 +60,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">{children}</div>
-            </div>
-            <TailwindIndicator />
+            <NextIntlClientProvider locale={lng} messages={messages}>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">{children}</div>
+              </div>
+              <TailwindIndicator />
+            </NextIntlClientProvider>
           </ThemeProvider>
         </body>
       </html>
